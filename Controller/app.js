@@ -1,5 +1,12 @@
 function generateBoard() {
     let boardSize = prompt("Enter board size:", 4);
+    let board = createBoard(boardSize);
+    addItems(getOrder(boardSize), board);
+    addEmptyTile(board);
+    document.body.appendChild(board);
+}
+
+function createBoard(boardSize) {
     let body = document.body;
     body.innerHTML = "";
     let board = document.createElement("div");
@@ -8,26 +15,33 @@ function generateBoard() {
     board.style.gridTemplateColumns = boardPrecent;
     board.style.gridTemplateRows = boardPrecent;
 
-    let items = [];
+    return board;
+}
+
+function getOrder(boardSize) {
     let order = Array.from(Array(boardSize * boardSize - 1).keys());
     do {
         shuffleArray(order);
         console.log("hi");
     } while (!isSolveable(order));
 
-    console.log(order);
+    return order;
+}
+
+function addItems(order, board) {
+    let items = [];
     for (let i of order) {
         items[i] = document.createElement("div");
         items[i].className = "board-item";
         items[i].textContent = order[i] + 1;
         board.appendChild(items[i]);
     }
+}
 
+function addEmptyTile(board) {
     let emptyItem = document.createElement("div");
     emptyItem.className = "empty";
-    body.appendChild(emptyItem);
-
-    body.appendChild(board);
+    board.appendChild(emptyItem);
 }
 
 function shuffleArray(array) {

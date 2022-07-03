@@ -37,10 +37,8 @@ button:hover {
     width: 50%;
     height: 80%;
     background-color: rgb(3, 218, 198);
-
-    grid-template-rows: 33% 33% 33%;
-    grid-template-columns: 33% 33% 33%;
     padding: 10px;
+    border-radius: 10px;
 }
 
 .board-item {
