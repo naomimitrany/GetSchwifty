@@ -9,12 +9,49 @@ function generateBoard() {
     board.style.gridTemplateRows = boardPrecent;
 
     let items = [];
-    for (let i = 1; i <= boardSize * boardSize - 1; i++) {
+    let order = Array.from(Array(boardSize * boardSize - 1).keys());
+    do {
+        shuffleArray(order);
+        console.log("hi");
+    } while (!isSolveable(order));
+
+    console.log(order);
+    for (let i of order) {
         items[i] = document.createElement("div");
         items[i].className = "board-item";
-        items[i].textContent = i;
-        board.appendChild(items[i])
+        items[i].textContent = order[i] + 1;
+        board.appendChild(items[i]);
     }
 
+    let emptyItem = document.createElement("div");
+    emptyItem.className = "empty";
+    body.appendChild(emptyItem);
+
     body.appendChild(board);
+}
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+function isSolveable(order, rows) {
+    let swaps = 0;
+    for (let i = 0; i < order.length; i++) {
+        for (let j = i; j < order.length - i; j++) {
+            if (order[j] < order[i]) {
+                swaps++;
+            }
+        }
+    }
+
+    if (rows % 2 != 0) {
+        return swaps % 2 == 0;
+    }
+    // empty square is always at the end so if rows are even board is always solveable
+    return true;
 }
