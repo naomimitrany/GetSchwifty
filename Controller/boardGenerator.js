@@ -97,7 +97,7 @@ function isSolveable(order) {
     return (swaps + boardSize) % 2 == 0;
 }
 
-function onMove(i) {
+async function onMove(i) {
     if (i - 1 >= 0 && i % boardSize != 0 && boardItems[i - 1].className == "empty") {
         switchTiles(i, i - 1);
     }
@@ -119,9 +119,8 @@ function onMove(i) {
     }
     
     displayItems();
-    if (hasWon()) {
-        win();
-        setTimeout( () => {generateBoard();}, 20);
+    if (hasWon() && await win()) {
+        setTimeout( () => {generateBoard();}, 30);
     }
 }
 
@@ -143,11 +142,15 @@ function hasWon() {
     return true
 }
 
-function win() {
+async function win() {
     document.getElementById("rick").src = "..\\Model\\happy-rick.png";
     document.getElementById("morty").src = "..\\Model\\happy-morty.png";
+    await playGetSchwifty()
 
-    setTimeout(() => alert("WOHOOO YOU WON!!"), 20);
+    return window.confirm("WOHOOO YOU WON!!\nPress OK to start a new game");
 }
 
-
+async function playGetSchwifty() {
+    let getSchwiftySound = new Audio("..\\Model\\get-schwifty.mp3");
+    await getSchwiftySound.play();
+}
