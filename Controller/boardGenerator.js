@@ -63,7 +63,7 @@ function shuffleArray(array) {
     }
 }
 
-function isSolveable(order, rows) {
+function isSolveable(order) {
     let swaps = 0;
     for (let i = 0; i < order.length; i++) {
         for (let j = i; j < order.length - i; j++) {
@@ -73,10 +73,10 @@ function isSolveable(order, rows) {
         }
     }
 
-    if (rows % 2 != 0) {
+    if (boardSize % 2 != 0) {
         return swaps % 2 == 0;
     }
-    return (swaps + rows) % 2 == 0;
+    return (swaps + boardSize) % 2 == 0;
 }
 
 function onMove(i) {
