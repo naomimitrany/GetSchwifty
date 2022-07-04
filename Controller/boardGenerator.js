@@ -120,9 +120,8 @@ function onMove(i) {
     
     displayItems();
     if (hasWon()) {
-        setTimeout( () => {
         win();
-        generateBoard();}, 10);
+        setTimeout( () => {generateBoard();}, 20);
     }
 }
 
@@ -145,7 +144,10 @@ function hasWon() {
 }
 
 function win() {
-    alert("WOHOOO YOU WON!!");
+    document.getElementById("rick").src = "assets\\happy-rick.png";
+    document.getElementById("morty").src = "assets\\happy-morty.png";
+
+    setTimeout(() => alert("WOHOOO YOU WON!!"), 20);
 }
 
 
