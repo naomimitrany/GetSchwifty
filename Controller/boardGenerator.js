@@ -3,12 +3,14 @@ var boardSize;
 var board;
 
 function generateBoard() {
+    document.body.style.flexDirection = "row";
     boardSize = Number(prompt("Enter board size:", 4));
     createBoard();
     addItems(getOrder());
     displayItems();
     addEmptyTile();
     document.body.appendChild(board);
+    addImages()
 }
 
 function createBoard() {
@@ -19,6 +21,23 @@ function createBoard() {
     let boardPrecent = `${100 / boardSize}% `.repeat(boardSize);
     board.style.gridTemplateColumns = boardPrecent;
     board.style.gridTemplateRows = boardPrecent;
+}
+
+function addImages() {
+    let morty = document.createElement("img");
+    morty.src = "assets\\morty.png";
+    morty.style.width = "auto";
+    morty.style.height = "50%";
+    morty.id = "morty";
+
+    let rick = document.createElement("img");
+    rick.src = "assets\\rick.png";
+    rick.style.width = "auto";
+    rick.style.height = "50%";
+    rick.id = "rick";
+
+    document.body.insertBefore(morty, board);
+    document.body.appendChild(rick, board);
 }
 
 function getOrder() {
@@ -102,7 +121,7 @@ function onMove(i) {
     displayItems();
     if (hasWon()) {
         setTimeout( () => {
-        alert("WOHOOO YOU WON!!");
+        win();
         generateBoard();}, 10);
     }
 }
@@ -123,6 +142,10 @@ function hasWon() {
         }
     }
     return true
+}
+
+function win() {
+    alert("WOHOOO YOU WON!!");
 }
 
 
