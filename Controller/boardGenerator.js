@@ -25,13 +25,13 @@ function createBoard() {
 
 function addImages() {
     let morty = document.createElement("img");
-    morty.src = "assets\\morty.png";
+    morty.src = "..\\Model\\morty.png";
     morty.style.width = "auto";
     morty.style.height = "50%";
     morty.id = "morty";
 
     let rick = document.createElement("img");
-    rick.src = "assets\\rick.png";
+    rick.src = "..\\Model\\rick.png";
     rick.style.width = "auto";
     rick.style.height = "50%";
     rick.id = "rick";
@@ -144,8 +144,8 @@ function hasWon() {
 }
 
 function win() {
-    document.getElementById("rick").src = "assets\\happy-rick.png";
-    document.getElementById("morty").src = "assets\\happy-morty.png";
+    document.getElementById("rick").src = "..\\Model\\happy-rick.png";
+    document.getElementById("morty").src = "..\\Model\\happy-morty.png";
 
     setTimeout(() => alert("WOHOOO YOU WON!!"), 20);
 }
