@@ -29,6 +29,7 @@ function getOrder() {
         shuffleArray(order);
     } while (!isSolveable(order));
 
+    console.log(order);
     return order;
 }
 
@@ -66,7 +67,7 @@ function shuffleArray(array) {
 function isSolveable(order) {
     let swaps = 0;
     for (let i = 0; i < order.length; i++) {
-        for (let j = i; j < order.length - i; j++) {
+        for (let j = i + 1; j < order.length; j++) {
             if (order[j] < order[i]) {
                 swaps++;
             }
@@ -103,5 +104,16 @@ function switchTiles (i1, i2) {
     boardItems[i2] = temp;
     boardItems[i1].addEventListener("click", () => onMove(i1));
     boardItems[i2].addEventListener("click", () => onMove(i2));
-    displayItems()
+    displayItems();
+    hasWon();
+}
+
+function hasWon() {
+    for (let i = 0; i < boardItems.length - 1; i++) {
+        if (i + 1 != boardItems[i].id)
+        {
+            return;
+        }
+    }
+    alert("WOHOOO YOU WON!!")
 }
