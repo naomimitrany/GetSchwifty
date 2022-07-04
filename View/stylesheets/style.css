@@ -28,7 +28,7 @@ body {
     font-size: large;
 }
 
-button:hover {
+button:hover, .board-item:hover {
     cursor: pointer;
 }
 
@@ -49,7 +49,7 @@ button:hover {
     justify-self: center;
     align-self: center;
     border-radius: 10px;
-    font-size: xx-large;
+    font-size: 200%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
     display: flex;
