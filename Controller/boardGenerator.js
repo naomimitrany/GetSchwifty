@@ -95,9 +95,15 @@ function onMove(i) {
         switchTiles(i, i + boardSize);
     }
 
+    else {
+        return;
+    }
+    
+    displayItems();
     if (hasWon()) {
-        alert("WOHOOO YOU WON!!")
-        generateBoard();
+        setTimeout( () => {
+        alert("WOHOOO YOU WON!!");
+        generateBoard();}, 10);
     }
 }
 
@@ -107,7 +113,6 @@ function switchTiles (i1, i2) {
     boardItems[i2] = temp;
     boardItems[i1].addEventListener("click", () => onMove(i1));
     boardItems[i2].addEventListener("click", () => onMove(i2));
-    displayItems();
 }
 
 function hasWon() {
@@ -119,3 +124,5 @@ function hasWon() {
     }
     return true
 }
+
+
