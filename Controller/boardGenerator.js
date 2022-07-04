@@ -1,10 +1,10 @@
-var boardItems = [];
+var boardItems;
 var boardSize;
 var board;
 
 function generateBoard() {
     boardSize = Number(prompt("Enter board size:", 4));
-    board = createBoard();
+    createBoard();
     addItems(getOrder());
     displayItems();
     addEmptyTile();
@@ -14,13 +14,11 @@ function generateBoard() {
 function createBoard() {
     let body = document.body;
     body.innerHTML = "";
-    let board = document.createElement("div");
+    board = document.createElement("div");
     board.className = "board";
     let boardPrecent = `${100 / boardSize}% `.repeat(boardSize);
     board.style.gridTemplateColumns = boardPrecent;
     board.style.gridTemplateRows = boardPrecent;
-
-    return board;
 }
 
 function getOrder() {
@@ -29,11 +27,11 @@ function getOrder() {
         shuffleArray(order);
     } while (!isSolveable(order));
 
-    console.log(order);
     return order;
 }
 
 function addItems(order) {
+    boardItems = []
     for (let i of order) {
         boardItems[i] = document.createElement("div");
         boardItems[i].className = "board-item";
@@ -96,6 +94,11 @@ function onMove(i) {
     else if (i + boardSize < boardItems.length && (boardItems[i + boardSize].className == "empty")) {
         switchTiles(i, i + boardSize);
     }
+
+    if (hasWon()) {
+        alert("WOHOOO YOU WON!!")
+        generateBoard();
+    }
 }
 
 function switchTiles (i1, i2) {
@@ -105,15 +108,14 @@ function switchTiles (i1, i2) {
     boardItems[i1].addEventListener("click", () => onMove(i1));
     boardItems[i2].addEventListener("click", () => onMove(i2));
     displayItems();
-    hasWon();
 }
 
 function hasWon() {
     for (let i = 0; i < boardItems.length - 1; i++) {
         if (i + 1 != boardItems[i].id)
         {
-            return;
+            return false;
         }
     }
-    alert("WOHOOO YOU WON!!")
+    return true
 }
