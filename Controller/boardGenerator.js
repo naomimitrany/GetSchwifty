@@ -80,11 +80,11 @@ function isSolveable(order, rows) {
 }
 
 function onMove(i) {
-    if (i - 1 >= 0 && i - 1 % boardSize != 1 && boardItems[i - 1].className == "empty") {
+    if (i - 1 >= 0 && i % boardSize != 0 && boardItems[i - 1].className == "empty") {
         switchTiles(i, i - 1);
     }
 
-    else if (i + 1 < boardItems.length && i + 1 % boardSize != boardItems - 1 && boardItems[i + 1].className == "empty") {
+    else if (i + 1 < boardItems.length && i % boardSize != boardSize - 1 && boardItems[i + 1].className == "empty") {
         switchTiles(i, i + 1);
     }
 
